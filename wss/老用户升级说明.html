@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WSS1.3.0 升级说明</title>
+
+<style type="text/css">
+<!--
+img {border: none;}
+li {list-style: none;}
+body,html{  font-family:Arial; width:100%;   margin: 0; padding: 0; min-width:960px; background:#E0E0E0; }
+body {
+	font-size: 12px; line-height:150%;
+}
+table {
+	font-size: 12px;
+}
+p{ margin:5px;}
+.main_body{ width:947px; margin:10px auto auto auto;}
+.content_bg{ width:945px; border:1px solid #CCCCCC;  background:#FFF; }
+.rowcon{ width:95%;  margin:auto; }
+.rowcon td a{ color:#395a90;text-decoration:underline;  padding-right:10px; }
+.rowcon td a:visited{ color:#395a90;text-decoration:underline; }
+.rowcon td a:hover{ color:#395a90;text-decoration:none; }
+.rowcon a{ color:#395a90;text-decoration:underline;  padding-right:10px; }
+.rowcon a:visited{ color:#395a90;text-decoration:underline; }
+.rowcon a:hover{ color:#395a90;text-decoration:none; }
+.big_text{ font-size:36px; font-weight:bold; line-height:150%;}
+.font_big18{ font-size:18px; font-weight:bold;}
+.ping_logo{ background:url(wss/skin/themes/base/images/wsslogo.png) no-repeat; width:158px; height:158px; margin:20px auto;}
+}
+-->
+</style>
+</head>
+
+<body>
+<div class="main_body">
+<div class="content_bg">
+<div class="rowcon">
+
+
+    
+  <p>&nbsp;</p>
+  <p><span class="font_big18">WSS 1.3.0 升级说明</span><br/>
+    <br/>
+    <span class="font_big18">新增功能</span></p>
+  <p>1，工作分解结构(WBS)，可以将大项目分解成多个子项目，同时，适合将需要多人协作完成的任务分解给不同的人员完成；<br />
+    2，项目详情页，将按照任务的结构来展现任务；<br />
+    3，一级导航增加“日志”，可展现当前用户的日志和系统所有日志，并允许评论；<br />
+    4，交互优化，加强沟通，并突出“我”的概念，任务、日志、项目、文档相应调整；<br />
+    5，去掉了“高级搜索入口开关”的功能；<br />
+    6，数据库优化，提升查询速度，任务理论查询速度提高85倍，并节省空间25%；<br />
+    7，修复有可能导致SQL注入的漏洞（感谢乌云网友lion(lp)反馈的漏洞）；<br />
+    8，修复上传SHELL漏洞（感谢乌云网友hfy反馈的漏洞）。<br />
+	</p>
+	<br /><br />
+    <span class="font_big18">使用方式</span><br/>
+	
+	<p>由于WSS1.3.0引入了WBS的概念，所以项目与任务的管理形式较以前的版本有很大不同：</p>
+	<p>1，可以将大型项目分解成不同的子项目；</p>
+	<p>2，对于子项目，可以按任务类型来分解子任务，比如，项目A，可以分解出 设计、开发、测试 三个子任务（这一级别的任务称为“控制账户 （CA）”），这三个任务可以分配给相应的负责人，如开发经理或组长，再由相应的的负责人继续细化分解任务给组员，如此项目经理只需要跟踪项目下的控制账户，而具体的到某个节点的任务由相应的负责人或组长跟踪即可。<br/>
+	  <br/>
+	  <p align="center">
+	  <img src="readmefile/wbs.png" width="587" height="327" />	  </p>
+	  <br/>
+	  
+        <span class="font_big18">更新说明</span>
+        <p>1) 备份你的数据库，使用phpmyadmin导出tankdb数据库(导出后可以再试一下可否正常导入)；</p>
+	<p>2) 备份你服务器上WSS目录下的/upload目录，与/editor/attached目录；</p>
+	<p>3) 1.2.8版以前的用户（不包括1.2.8），需要使用phpmyadmin将WSS.1.3.0 压缩包中的 /database/ tk_item.sql 文件导入数据库； </p>
+	<p>4) 将WSS 1.3.0压缩包中的<strong> /update/</strong> 目录下的<strong> upgrade.php</strong> 拷贝至你服务器上要升级的WSS目录中；</p>
+	<p>5) 确认已经使用管理员权限登录WSS（此时升级操作还未进行，登录的还是您老版本的WSS）；</p>
+	<p>5) 在浏览器中访问  upgrade.php ，如： <strong>http://你的服务器地址/wss/upgrade.php</strong>  ；</p>
+	<p>6) 按照提示进行操作，并等待数据库升级完成，升级过程中不要关闭升级页面；</p>
+	<p>7) 数据库升级完成后，返回首页，并退出登录（重要）；</p>
+	<p>8) 用 WSS 1.3.0 压缩包中的 WSS目录覆盖你服务器上的WSS目录即可完成升级（如修改过数据库连接文件config/tank_config.php，则升级后需要重新配置）；</p>
+	<p>9) 删除你服务器上WSS目录中的 <strong> upgrade.php</strong> 文件；</p>
+	<p>10) 如升级后样式错乱，使用ctrl+F5 强制刷新；</p>
+	<p>11) 1.2.8版本之前的用户升级后，可能出现用户不可见的情况，只要相应的用户登录一次系统即可。</p>
+	<p>&nbsp; </p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p><br/>
+	  <span class="font_big18">免责声明</span><br/>
+	  </p>
+	<p>WSS为使用者根据需要自愿下载使用，White Shark System以及WSS的作者，对WSS使用过程中造成的任何数据丢失及其他风险不承担任何责任。</p>
+  <br/>
+</div>
+</div>
+</div> <br/>
+</body>
+</html>

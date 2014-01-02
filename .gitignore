@@ -1,0 +1,8 @@
+*.rar
+*.ldf
+*.mdf
+*.tmp
+2010data/
+data/
+.idea/
+init_table.aspx
